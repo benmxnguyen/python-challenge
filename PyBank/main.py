@@ -48,14 +48,14 @@ with open(csvpath) as csvfile:
 
     #print results to terminal
     print(f"Financial Analysis\n"
-  "-------------------------\n"
-  f"Total Months: {total_months}\n"
-  f"Total: ${total}\n"
-  f"Average Change: ${avg_change}\n"
-  f"Greatest Increase in Profits: {greatest_inc_pair[0]} (${greatest_inc_pair[1]})\n"
-  f"Greatest Decrease in Profits: {greatest_dec_pair[0]} (${greatest_dec_pair[1]})\n"
-  "-------------------------\n"
-        "")
+         "-------------------------\n"
+          f"Total Months: {total_months}\n"
+          f"Total: ${total}\n"
+          f"Average Change: ${avg_change}\n"
+          f"Greatest Increase in Profits: {greatest_inc_pair[0]} (${greatest_inc_pair[1]})\n"
+          f"Greatest Decrease in Profits: {greatest_dec_pair[0]} (${greatest_dec_pair[1]})\n"
+           "-------------------------\n"
+                    "")
 
     #writing to a text file
     #setting path for file
