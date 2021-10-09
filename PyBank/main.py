@@ -13,7 +13,7 @@ with open(csvpath) as csvfile:
     #strip and store header
     csv_header = next(csvreader)
 
-    #creating Empty Lists
+    #creating empty lists
     dates = []
     profits = []
 
