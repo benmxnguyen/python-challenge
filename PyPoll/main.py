@@ -1,6 +1,7 @@
 # Import modules needed
 import csv
 import os
+from typing import ForwardRef
 
 #set file path
 csvpath = os.path.join("Resources", "election_data.csv").replace("\\", "/")
@@ -17,36 +18,53 @@ with open(csvpath) as csvfile:
     voter_id = []
     county_list = []
     candidate_choice = []
-    votes_for_each_cand = []
+    vote_count = []
     percentage_of_votes = []
+    candidate_list = []
 
     #populating empty lists
     for row in csvreader:
         voter_id.append(row[0])
         county_list.append(row[1])
         candidate_choice.append(row[2])
+    #    vote_count.append()
+        if row[2] in candidate_list:
+            pass
+        else:
+            candidate_list.append(row[2])
     
     #find number of votes
     total_votes = len(voter_id)
 
-    #list of candidates
-    candidates = list(set(candidate_choice))
+    #-----------------------------------------------------------
+    #list of candidates w/o for loop
+    #candidates = list(set(candidate_choice))
+    #-----------------------------------------------------------
 
     #total votes for each cand
-    for cand in candidates:
+    votes_for_each_cand = []
+    for cand in candidate_list:
         votes_for_each_cand.append(candidate_choice.count(cand))
-    
 
     #percentage of votes for each candidate
     for votes in votes_for_each_cand:
         percentage_of_votes.append(round(votes/total_votes*100))
     
     
-    #find winner
-    winner = candidates[percentage_of_votes.index(max(percentage_of_votes))]
+    #find winner with for loop
+    max_perc = 0
+    for perc in percentage_of_votes:
+        if perc > max_perc:
+            max_perc = perc
+    for_winner = candidate_list[percentage_of_votes.index(max_perc)]
+
+    #-----------------------------------------------------------
+    #find winner w/o for loop
+    #winner = candidate_list[percentage_of_votes.index(max(percentage_of_votes))]
+    #-----------------------------------------------------------
 
     #zip candidates with perecentage of votes
-    cand_pairs = zip(candidates, percentage_of_votes, votes_for_each_cand)
+    cand_pairs = zip(candidate_list, percentage_of_votes, votes_for_each_cand)
 
     #convert zip into list
     list_of_cand_pairs = list(cand_pairs)
@@ -65,7 +83,7 @@ with open(csvpath) as csvfile:
             f"{list_of_cand_pairs[2][0]}: {list_of_cand_pairs[2][1]}.000% ({list_of_cand_pairs[2][2]})\n"
             f"{list_of_cand_pairs[3][0]}: {list_of_cand_pairs[3][1]}.000% ({list_of_cand_pairs[3][2]})\n"
             "-------------------------\n"
-            f"Winner: {winner}\n"
+            f"Winner: {for_winner}\n"
             "-------------------------"
                     "")
 
@@ -82,7 +100,7 @@ with open(csvpath) as csvfile:
                     f"{list_of_cand_pairs[2][0]}: {list_of_cand_pairs[2][1]}.000% ({list_of_cand_pairs[2][2]})\n"
                     f"{list_of_cand_pairs[3][0]}: {list_of_cand_pairs[3][1]}.000% ({list_of_cand_pairs[3][2]})\n"
                     "-------------------------\n"
-                    f"Winner: {winner}\n"
+                    f"Winner: {for_winner}\n"
                     "-------------------------"
                             "")
     

@@ -17,17 +17,20 @@ with open(csvpath) as csvfile:
     dates = []
     profits = []
 
-    #populating the empty lists
+    #populating the empty lists and finding total
+    total = 0
     for row in csvreader:
         dates.append(row[0])
         profits.append(int(row[1]))
-    
+        total = total + int(row[1])
 
     #find total number of months
     total_months = len(dates)
 
-    #find total
-    total = sum(profits)
+    #-----------------------------------------------------------
+    #find total w/o for loop
+    #total = sum(profits)
+    #-----------------------------------------------------------
 
     #calculating change between each period
     changes_between = []
@@ -38,13 +41,29 @@ with open(csvpath) as csvfile:
     #find average of changes
     avg_change = round(sum(changes_between)/len(changes_between),2)
 
+    #find greatest increase and decrease using for loop
+    max_greatest_inc = 0
+    for index,changes in enumerate(changes_between):
+        if changes > max_greatest_inc:
+            max_greatest_inc = changes
+            for_greatest_inc_date = dates[index + 1]
+
+    
+    max_greatest_dec = 0
+    for index,changes in enumerate(changes_between):
+        if changes < max_greatest_dec:
+            max_greatest_dec = changes
+            for_greatest_dec_date = dates[index + 1]
+    
+    #-----------------------------------------------------------
     #find greatest increase and decrease
-    greatest_inc = max(changes_between)
-    greatest_dec = min(changes_between)
-    greatest_inc_date = dates[changes_between.index(greatest_inc) + 1]
-    greatest_dec_date = dates[changes_between.index(greatest_dec) + 1]
-    greatest_inc_pair = (greatest_inc_date, greatest_inc)
-    greatest_dec_pair = (greatest_dec_date, greatest_dec)
+    # greatest_inc = max(changes_between)
+    # greatest_dec = min(changes_between)
+    # greatest_inc_date = dates[changes_between.index(greatest_inc) + 1]
+    # greatest_dec_date = dates[changes_between.index(greatest_dec) + 1]
+    greatest_inc_pair = (for_greatest_inc_date, max_greatest_inc)
+    greatest_dec_pair = (for_greatest_dec_date, max_greatest_dec)
+    #-----------------------------------------------------------
 
     #print results to terminal
     print(f"Financial Analysis\n"
