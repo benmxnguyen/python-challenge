@@ -17,7 +17,6 @@ with open(csvpath) as csvfile:
     voter_id = []
     county_list = []
     candidate_choice = []
-    vote_count = []
     percentage_of_votes = []
     candidate_list = []
 
@@ -26,7 +25,6 @@ with open(csvpath) as csvfile:
         voter_id.append(row[0])
         county_list.append(row[1])
         candidate_choice.append(row[2])
-    #    vote_count.append()
         if row[2] in candidate_list:
             pass
         else:
