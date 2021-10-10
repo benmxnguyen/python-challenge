@@ -1,7 +1,6 @@
 # Import modules needed
 import csv
 import os
-from typing import ForwardRef
 
 #set file path
 csvpath = os.path.join("Resources", "election_data.csv").replace("\\", "/")
